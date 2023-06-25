@@ -18,7 +18,7 @@
             <p class="book-description">{{ book.description }}</p>
         </div>
         <!-- the review form for the book -->
-        <ReviewForm :book="book" @add-review="addReview"/>
+        <ReviewForm :book="book" :submitted="submitted" :errorIncurred="errorIncurred" @add-review="addReview"/>
     </div>
 </template>
 
@@ -32,6 +32,8 @@
             return {
                 id: '',
                 book: {},
+                submitted: false,
+                errorIncurred: false
             }
         },
         components: {
@@ -50,13 +52,23 @@
             },
             // A function that sends a post request to an external API, takes in a review object
             async addReview(review) {
-                const res = await fetch('https://enr2djwmu4o1.x.pipedream.net', {
-                    method: 'POST',
-                    headers: {
-                    'Content-type': 'application/json',
-                    },
-                    body: JSON.stringify(review),
-                })
+                try {
+                    //in case we set the errorIncurred to true
+                    this.errorIncurred=false
+                    const res = await fetch('https://enr2djwmu4o1.x.pipedream.net', {
+                        method: 'POST',
+                        headers: {
+                        'Content-type': 'application/json',
+                        },
+                        body: JSON.stringify(review),
+                   })
+                // set the submitted to true, to display the success message
+                this.submitted = true; 
+                } catch (error) {
+                    this.errorIncurred=true
+                    return
+                }
+
             }
         },
         async created() {

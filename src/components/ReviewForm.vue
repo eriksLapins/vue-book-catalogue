@@ -1,19 +1,22 @@
 <template>
     <form @submit="onSubmit" class="review-form" v-if="!submitted">
-        <h2>Write a review</h2>
+        <h2>Write a review <p class="error-text" v-if="errorIncurred">Something went wrong, please try again later</p></h2>
         <h3>Rate the book</h3>
-        <star-rating
-        :increment="1"
-        :rounded-corners="true"
-        :border-color="['#FFC163'][0]"
-        :border-width="4"
-        inactive-color="#fff"
-        active-color="#FFC163"
-        :star-size="24"
-        :show-rating="false"
-        v-model:rating="rating"
-        ></star-rating>
-        <textarea type="text" name="review-text" v-model="reviewText" class="review-text"></textarea>
+        <div class="star-rating">
+            <star-rating
+            :increment="1"
+            :rounded-corners="true"
+            :border-color="['#FFC163'][0]"
+            :border-width="4"
+            inactive-color="#fff"
+            active-color="#FFC163"
+            :star-size="24"
+            :show-rating="false"
+            v-model:rating="rating"
+            ></star-rating>
+            <p class="stars-error" v-if="tooLittleStars">Please rate the book with at least 1 star</p>
+        </div>
+        <textarea type="text" v-model="reviewText" class="review-text"></textarea>
         <div class="submit-button">
             <button type="submit">Submit Review</button>
         </div>
@@ -33,11 +36,13 @@
             return {
                 rating: 0,
                 reviewText: '',
-                submitted: false
+                tooLittleStars: false
             }
         },
         props: {
             book: Object,
+            submitted: Boolean,
+            errorIncurred: Boolean
         },
         components: {
             StarRating
@@ -48,10 +53,10 @@
                 e.preventDefault()
 
                 if (this.rating==0) {
-                    alert('Please rate at least with 1 star')
+                    this.tooLittleStars=true
                     return
                 }
-
+                
                 // create a new review Object
                 const newReview = {
                     id: uuid.v4(),
@@ -64,8 +69,8 @@
                 this.$emit('add-review', newReview)
                 this.rating = 0
                 this.reviewText = ''
-                // set the submitted to true, to display the success message
-                this.submitted = true
+                // in case we just had an error with stars, we set the error boolean back to false
+                this.tooLittleStars=false
                 },
         }
     }
@@ -96,6 +101,10 @@
 
     h2 {
         font-size: 24px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 32px;
     }
 
     h3 {
@@ -135,6 +144,24 @@
         color: var(--typography-dark, rgba(0, 0, 0, 0.95));
         font-size: 14px;
         font-weight: 700;
+    }
+
+
+    .error-text {
+        color: red;
+        font-weight: bold;
+        font-size: 20px;
+    }
+    .stars-error {
+        color: red;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    .star-rating {
+        display: flex;
+        flex-direction: row;
+        gap: 32px;
     }
 
 </style>
