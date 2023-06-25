@@ -16,14 +16,7 @@
         },
         components: {
             Book,
-        },
-        // methods: {
-        //     async viewBook(bookId) {
-        //         const book = await this.getBookById(bookId);
-        //         router
-        //     }
-        // }
-        
+        }        
     }
 </script>
 

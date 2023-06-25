@@ -4,7 +4,7 @@
         <!-- current star rating of the book -->
         <star-rating 
             class="current-rating"
-             v-bind:increment="0.1"
+             :increment="0.1"
              :rounded-corners="true"
              :border-color="['#FFC163'][0]"
              :border-width="4"

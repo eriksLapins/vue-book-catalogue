@@ -18,6 +18,7 @@
             return {
                 initialBooks: [],
                 books: [],
+                searchTerm: ''
             }
         },
         methods: {
@@ -33,6 +34,7 @@
             // filter out the searched for books
             async filterSearch(searchTerm) {
                 // each time we check the initial books list
+                this.searchTerm = searchTerm
                 const bookList = this.initialBooks
                 const filteredList = bookList.filter((book) => {
                     return book.title.toLowerCase().includes(searchTerm.toLowerCase())
