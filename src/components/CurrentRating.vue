@@ -1,5 +1,5 @@
 <template>
-    <div class="review-item">
+    <div class="current-rating-container">
         <p class="book-rating typography-light">{{ book.rating }}</p>
         <!-- current star rating of the book -->
         <star-rating 
@@ -15,8 +15,6 @@
              :show-rating="false"
              :read-only="true">
         </star-rating>
-        
-
     </div>
 
 </template>
@@ -24,7 +22,7 @@
 <script>
 import StarRating from 'vue-star-rating'
 export default {
-    name: "BookReview",
+    name: "CurrentRating",
     props: {
         book: Object,
     },
@@ -35,7 +33,7 @@ export default {
 </script>
 
 <style scoped>
-    .review-item {
+    .current-rating-container {
         display: flex;
         flex-direction: row;
         align-items: flex-start;

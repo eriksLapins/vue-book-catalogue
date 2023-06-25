@@ -1,14 +1,15 @@
 <template>
     <div class="details-container">
         <Book :book="book"/>
-        <BookReview :book="book"/>
+        <CurrentRating :book="book"/>
+
 
     </div>
 </template>
 
 <script>
     import Book from '../components/Book.vue'
-    import BookReview from '../components/BookReview.vue'
+    import CurrentRating from '../components/CurrentRating.vue'
     export default {
         name: "Details",
         data() {
@@ -19,7 +20,7 @@
         },
         components: {
             Book,
-            BookReview
+            CurrentRating
         },  
         methods: {
             async getBookById(bookId) {
