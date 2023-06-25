@@ -14,23 +14,27 @@
         v-model:rating="rating"
         ></star-rating>
         <textarea type="text" name="review-text" v-model="reviewText" class="review-text"></textarea>
-        <button type="submit">Submit Review</button>
+        <div class="submit-button">
+            <button type="submit">Submit Review</button>
+        </div>
     </form>
 </template>
 
 <script scoped>
     import {uuid} from 'vue-uuid'
     import StarRating from 'vue-star-rating'
+    
     export default {
         name: "ReviewForm",
         data() {
             return {
                 rating: 0,
-                reviewText: ''
+                reviewText: '',
             }
         },
         props: {
             book: Object,
+            submitted: Boolean
         },
         components: {
             StarRating
@@ -47,9 +51,10 @@
                 const newReview = {
                     id: uuid.v4(),
                     reviewText: this.reviewText,
-                    rating: this.rating
+                    rating: this.rating,
+                    bookId: this.book.id
                 }
-                
+
                 this.$emit('add-review', newReview)
                 this.rating = 0
                 this.reviewText = ''
@@ -59,6 +64,7 @@
 </script>
 
 <style scoped>
+
     .review-form {
         display: flex;
         flex-direction: column;
@@ -74,4 +80,38 @@
         background: #FFF;
     }
 
+    h2, h3 {
+        align-self: stretch;
+        color: var(--typography-dark, rgba(0, 0, 0, 0.95));
+        font-weight: 700;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    h3 {
+        font-size: 18px;
+    }
+
+    .submit-button {
+        display: flex;
+        padding: 10px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        align-self: stretch;
+        border-radius: 24px;
+        border: 2px solid var(--ui-primary, #3980B2);
+    }
+
+    button {
+        color: var(--ui-primary, #3980B2);
+        background-color: #fff;
+        border: none;
+        /* Body Bold */
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 24px;
+    }
 </style>

@@ -1,7 +1,13 @@
 <template>
     <div class="home-container">
         <Search @change-value="filterSearch"/>
-        <Books :books="books"/>
+        <div v-if="searchTerm!=''" class="search-results">
+            <Books :books="books"/>
+        </div>
+        <div v-else class="search-results">
+            <h2>Explore books</h2>
+            <img src="../assets/images/Book.png" alt="a cartoon-like stack of books" width="144" height="144"/>
+        </div>
     </div>
 </template>
 
@@ -64,4 +70,21 @@
         align-items: center;
         gap: 32px;
     }
+    .search-results {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+    }
+    .search-results h2 {
+        color: var(--typography-dark, rgba(0, 0, 0, 0.95));
+        font-size: 24px;
+        font-weight: 700;
+        gap: 32px;
+        width: 100%;
+        text-align: center;
+    }
+
+    
 </style>

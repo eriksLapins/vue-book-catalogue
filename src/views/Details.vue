@@ -1,6 +1,8 @@
 <template>
     <div class="details-container">
-        <p>&lt; <router-link :to="{name:'home'}">Explore</router-link></p>
+        <div id="go-home">
+            <img src="../components/icons/arrow.svg" id="arrow-icon"/><router-link :to="{name:'home'}" id="explore-back">Explore</router-link>
+        </div>
         <Book :book="book"/>
         <CurrentRating :book="book"/>
         <p class="book-description">{{ book.description }}</p>
@@ -59,5 +61,21 @@
         align-items: flex-start;
         gap: 32px;
     }
+
+    #go-home {
+        display: flex;
+        align-items: flex-start;
+        gap: 4px;
+        align-self: stretch;
+    }
+
+    #explore-back {
+        color: var(--typography-dark, rgba(0, 0, 0, 0.95));
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 24px;
+        text-decoration-line: underline;
+    }
+
 
 </style>
