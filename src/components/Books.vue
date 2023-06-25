@@ -1,6 +1,8 @@
 <template>
-    <div v-for="book in books" :key="book.id" class="book-list">
-        <Book :book="book"/>
+    <div class="book-list">
+        <router-link :to="{ name: 'details', params: { bookId: book.id }}" v-for="book in books" :key="book.id">
+                <Book :book="book"/>
+        </router-link>
     </div>
 </template>
 
@@ -15,6 +17,12 @@
         components: {
             Book,
         },
+        // methods: {
+        //     async viewBook(bookId) {
+        //         const book = await this.getBookById(bookId);
+        //         router
+        //     }
+        // }
         
     }
 </script>

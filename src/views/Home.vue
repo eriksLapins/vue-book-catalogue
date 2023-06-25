@@ -1,6 +1,8 @@
 <template>
-    <Search @change-value="filterSearch"/>
-    <Books :books="books"/>
+    <div class="home-container">
+        <Search @change-value="filterSearch"/>
+        <Books :books="books"/>
+    </div>
 </template>
 
 <script scoped>
@@ -49,3 +51,15 @@
         },
     }
 </script>
+
+<style scoped>
+    .home-container {
+        display: flex;
+        width: 100%;
+        padding: 0px 16px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 32px;
+    }
+</style>
