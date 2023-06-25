@@ -28,4 +28,17 @@
         gap: 16px;
         align-self: stretch;
         }
+    @media (min-width: 800px) {
+        .book-list {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            gap: 37px 24px;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .book-list {
+            gap: 32px 24px;
+        }
+    }
 </style>

@@ -4,16 +4,16 @@
         <!-- current star rating of the book -->
         <star-rating 
             class="current-rating"
-             :increment="0.1"
-             :rounded-corners="true"
-             :border-color="['#FFC163'][0]"
-             :border-width="4"
-             inactive-color="#fff"
-             active-color="#FFC163"
-             :star-size="24"
-             :rating="book.rating"
-             :show-rating="false"
-             :read-only="true">
+            :increment="0.1"
+            :rounded-corners="true"
+            :border-color="['#FFC163'][0]"
+            :border-width="4"
+            inactive-color="#fff"
+            active-color="#FFC163"
+            :star-size="24"
+            :rating="book.rating"
+            :show-rating="false"
+            :read-only="true">
         </star-rating>
     </div>
 

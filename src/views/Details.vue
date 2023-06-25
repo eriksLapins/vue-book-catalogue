@@ -1,11 +1,23 @@
 <template>
     <div class="details-container">
-        <div id="go-home">
-            <img src="../components/icons/arrow.svg" id="arrow-icon"/><router-link :to="{name:'home'}" id="explore-back">Explore</router-link>
+        <!-- Link to go back to homepage -->
+        <router-link :to="{name:'home'}">
+            <div id="go-home">
+                <img src="../components/icons/arrow.svg" id="arrow-icon"/>
+                <p id="explore-back">Explore</p>
+            </div>
+        </router-link>
+        
+        <div class="book-details">
+            <div class="book-rating">
+                <!-- short version of book details component -->
+                <Book :book="book"/>
+                <!-- current star rating -->
+                <CurrentRating :book="book"/>
+            </div>
+            <p class="book-description">{{ book.description }}</p>
         </div>
-        <Book :book="book"/>
-        <CurrentRating :book="book"/>
-        <p class="book-description">{{ book.description }}</p>
+        <!-- the review form for the book -->
         <ReviewForm :book="book" @add-review="addReview"/>
     </div>
 </template>
@@ -28,6 +40,7 @@
             ReviewForm
         },  
         methods: {
+            // A function to get a book by id, takes in an ID
             async getBookById(bookId) {
                 const res = await fetch(`http://localhost:5000/books/${bookId}`)
 
@@ -35,6 +48,7 @@
                 
                 return data;
             },
+            // A function that sends a post request to an external API, takes in a review object
             async addReview(review) {
                 const res = await fetch('https://enr2djwmu4o1.x.pipedream.net', {
                     method: 'POST',
@@ -62,6 +76,21 @@
         gap: 32px;
     }
 
+    .book-details {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+        align-self: stretch;
+    }
+
+    .book-rating {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+    }
+
     #go-home {
         display: flex;
         align-items: flex-start;
@@ -77,5 +106,16 @@
         text-decoration-line: underline;
     }
 
+    @media (min-width: 800px) {
+        .book-details {
+            flex-direction: row;
+        }
 
+        .book-rating {
+            width: 30%;
+        }
+        .book-description {
+            width: 70%;
+        }
+    }
 </style>

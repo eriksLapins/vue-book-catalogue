@@ -19,6 +19,7 @@
                 searchTerm: ''
             }
         },
+        // watch for changes in search term
         watch: {
                 searchTerm(newSearchTerm) {
                     this.$emit('change-value', newSearchTerm);
@@ -39,10 +40,12 @@
         border: none;
         font-size: 16px;
         line-height: 24px;
+        width: 100%;
     }
 
     .search-bar {
         display: flex;
+        width: 100%;
         padding: 8px;
         align-items: flex-start;
         gap: 10px;
@@ -51,4 +54,5 @@
         border: 1px solid var(--ui-grey, #DDE1E3);
         background: #FFF;
     }
+
 </style>

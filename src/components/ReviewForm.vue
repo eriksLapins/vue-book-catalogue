@@ -52,6 +52,7 @@
                     return
                 }
 
+                // create a new review Object
                 const newReview = {
                     id: uuid.v4(),
                     reviewText: this.reviewText,
@@ -59,9 +60,11 @@
                     bookId: this.book.id
                 }
 
+                // emit an add review event and send the review object
                 this.$emit('add-review', newReview)
                 this.rating = 0
                 this.reviewText = ''
+                // set the submitted to true, to display the success message
                 this.submitted = true
                 },
         }
