@@ -1,5 +1,5 @@
 <template>
-    <form @submit="onSubmit" class="review-form">
+    <form @submit="onSubmit" class="review-form" v-if="!submitted">
         <h2>Write a review</h2>
         <h3>Rate the book</h3>
         <star-rating
@@ -18,6 +18,9 @@
             <button type="submit">Submit Review</button>
         </div>
     </form>
+    <div class="thank-you-container" v-if="submitted">
+        <p>Thank you! Review recieved.</p>
+    </div>
 </template>
 
 <script scoped>
@@ -30,21 +33,22 @@
             return {
                 rating: 0,
                 reviewText: '',
+                submitted: false
             }
         },
         props: {
             book: Object,
-            submitted: Boolean
         },
         components: {
             StarRating
         },
+        emits: ['add-review'],
         methods: {
             onSubmit(e) {
                 e.preventDefault()
 
-                if (!this.reviewText) {
-                    alert('Please add a task')
+                if (this.rating==0) {
+                    alert('Please rate at least with 1 star')
                     return
                 }
 
@@ -58,6 +62,7 @@
                 this.$emit('add-review', newReview)
                 this.rating = 0
                 this.reviewText = ''
+                this.submitted = true
                 },
         }
     }
@@ -114,4 +119,19 @@
         font-weight: 700;
         line-height: 24px;
     }
+    .thank-you-container {
+        display: flex;
+        padding: 10px;
+        align-items: flex-start;
+        gap: 10px;
+        border-radius: 4px;
+        background: var(--ui-light-blue, #CFEBFF);
+    }
+
+    .thank-you-container p {
+        color: var(--typography-dark, rgba(0, 0, 0, 0.95));
+        font-size: 14px;
+        font-weight: 700;
+    }
+
 </style>
